@@ -1,0 +1,4 @@
+tests/*.html
+tests/*.md
+tests/*.json
+tests/*.ipynb

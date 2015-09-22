@@ -12,5 +12,12 @@ and a [IPython Notebook](http://ipython.org/notebook.html) file.
 [test.ipynb]:http://nbviewer.ipython.org/github/scottsievert/rst-to-ipynb/blob/master/tests/test.ipynb
 
 ## TODO:
-* Properly parse args passing in; spaces/etc (anything with escape characters)
-  are not supported
+
+- [ ] Configurability of the default ReST role, in particular to handle maths in Sage's ReST dialect
+- [ ] Properly parse args passing in; spaces/etc (anything with escape
+      characters) are not supported
+
+- [X] Handle Sage's doctests
+- [X] Fenced code blocks: fix incompatibility between pandoc output and notedown input
+
+  Fixed in notedown; see: https://github.com/aaren/notedown/issues/29.

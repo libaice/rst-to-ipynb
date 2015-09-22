@@ -24,6 +24,9 @@ parser.add_argument("input_file", help="the input .rst file. Include the .rst")
 parser.add_argument("output_file", help="the .ipynb output file. Include .ipynb")
 args = parser.parse_args()
 
-system('pandoc -i {0} -o tmp.md'.format(args.input_file))
+system('pandoc --filter=/opt/rst-to-ipynb/sageblockfilter.py {0} --atx-headers -o tmp.md'.format(args.input_file))
+#system('pandoc {0} --atx-headers -o tmp.md'.format(args.input_file))
+#system("sed -i 's/``` {/```{/' tmp.md")
+
 system('notedown tmp.md -o {0}'.format(args.output_file))
-system('rm tmp.md')
+#system('rm tmp.md')
