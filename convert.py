@@ -1,6 +1,3 @@
-from os import system
-import argparse
-
 """
 WHAT THIS FILE DOES:
     converts an RST file to a .ipynb file
@@ -19,14 +16,67 @@ DEPS:
 [pandoc]:http://pandoc.org
 """
 
+import io
+import os
+pjoin = os.path.join
+import sys
+from subprocess import Popen, PIPE
+import argparse
+
+
 parser = argparse.ArgumentParser(add_help=False)
-parser.add_argument("input_file", help="the input .rst file. Include the .rst")
+parser.add_argument("input_file", nargs='?', help="the input .rst file. Include the .rst")
 parser.add_argument("output_file", help="the .ipynb output file. Include .ipynb")
 args = parser.parse_args()
 
-system('pandoc --filter=/opt/rst-to-ipynb/sageblockfilter.py {0} --atx-headers -o tmp.md'.format(args.input_file))
-#system('pandoc {0} --atx-headers -o tmp.md'.format(args.input_file))
-#system("sed -i 's/``` {/```{/' tmp.md")
+here = os.path.dirname(__file__)
 
-system('notedown tmp.md -o {0}'.format(args.output_file))
-#system('rm tmp.md')
+if args.input_file:
+    input_text = io.open(args.input_file).read()
+else:
+    input_text = sys.stdin.read()
+input_text = '\n'.join([
+    # add default-role: math for sage rst
+    '.. default-role:: math',
+    input_text])
+# pandoc doesn't properly handle : immediately-following close-`
+input_text = input_text.replace('`:', '` :')
+
+# convert rst->markdown with pandoc
+p = Popen([
+        'pandoc',
+        '--filter', pjoin(here, 'sageblockfilter.py'),
+        '--atx-headers',
+        '--from', 'rst',
+        '--to', 'markdown',
+    ], stdout=PIPE, stdin=PIPE)
+
+intermediate_md, _ = p.communicate(input_text.encode('utf8'))
+
+if p.returncode:
+    sys.exit("pandoc failed: %s" % p.returncode)
+
+intermediate_md = intermediate_md.decode('utf8', 'replace')
+
+# define some math macros for mathjax
+intermediate_md = '\n'.join([
+    # add some sage-defined macros:
+    '$$',
+    r'\def\CC{\bf C}',
+    r'\def\QQ{\bf Q}',
+    r'\def\RR{\bf R}',
+    r'\def\ZZ{\bf Z}',
+    '$$',
+    intermediate_md])
+
+# write intermediate markdown for debugging:
+# with open('tmp.md', 'wb') as f:
+#     f.write(intermediate_md)
+
+# md->ipynb via notedown
+p = Popen([
+    'notedown', '-o', args.output_file,
+], stdin=PIPE)
+p.communicate(intermediate_md.encode('utf8'))
+if p.returncode:
+    sys.exit("notedown failed: %s" % p.returncode)
