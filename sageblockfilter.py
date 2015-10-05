@@ -10,7 +10,7 @@ Code, link URLs, etc. are not affected.
 from pandocfilters import toJSONFilter, CodeBlock, Math
 
 def python_input_format(text):
-    return CodeBlock([u'', [u'rython', u'input'],[] ], text)
+    return CodeBlock([u'', [u'python', u'input'],[] ], text)
 def sage_input_format(text):
     return python_input_format(text)
 def sage_output_format(text):
