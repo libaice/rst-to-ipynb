@@ -19,11 +19,11 @@ all.rst: $(RST)
 
 #	sed -i 's/``` {/```{/' $@
 
-%.ipynb: %.md
-	notedown --match=fenced $< > $@
+%.ipynb: %.rst
+	python3 ../convert.py $< -o $@
 
 %.html: %.ipynb
-	ipython nbconvert $< --to html > $@
+	ipython nbconvert $< -o $@
 
 %.json: %.rst
 	pandoc --filter=../sageblockfilter.py $< --atx-headers -o $@

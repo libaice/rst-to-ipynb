@@ -25,14 +25,16 @@ import argparse
 
 
 parser = argparse.ArgumentParser(add_help=False)
-parser.add_argument("input_file", nargs='?', help="the input .rst file. Include the .rst")
-parser.add_argument("output_file", help="the .ipynb output file. Include .ipynb")
+parser.add_argument("input", nargs='?', help="the input .rst file. Include the .rst")
+parser.add_argument("-o", "--output", help="the .ipynb output file. Include .ipynb")
 args = parser.parse_args()
+
+print (args.input, args.output)
 
 here = os.path.dirname(__file__)
 
-if args.input_file:
-    input_text = io.open(args.input_file).read()
+if args.input:
+    input_text = io.open(args.input).read()
 else:
     input_text = sys.stdin.read()
 input_text = '\n'.join([
@@ -74,9 +76,10 @@ intermediate_md = '\n'.join([
 #     f.write(intermediate_md)
 
 # md->ipynb via notedown
-p = Popen([
-    'notedown', '-o', args.output_file,
-], stdin=PIPE)
+command = ['notedown']
+if args.output:
+    command.extend(['-o', args.output])
+p = Popen(command, stdin=PIPE)
 p.communicate(intermediate_md.encode('utf8'))
 if p.returncode:
     sys.exit("notedown failed: %s" % p.returncode)
