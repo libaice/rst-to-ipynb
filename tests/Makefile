@@ -11,7 +11,7 @@ html: $(HTML)
 json: $(JSON)
 
 all.rst: $(RST)
-	-rm $@
+	echo "# This file is built automatically; don't edit\n" > $@
 	for file in $^; do cat $$file >> $@; echo >> $@; done
 
 %.md: %.rst
