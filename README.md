@@ -4,14 +4,21 @@ This project converts between a standalone
 [reStructuredText](http://docutils.sourceforge.net/rst.html) file
 and a [IPython Notebook](http://ipython.org/notebook.html) file.
 
-## Example
+This is currently achieved by converting to markdown with
+[pandoc](http://pandoc.org) and then to IPython notebook using
+[notedown](https://github.com/aaren/notedown/), plus some
+configuration and tweaks.
+
+## Usage
 
 To produce xxx.ipynb from xxx.rst:
 
    python convert.py xxx.rst -o xxx.ipynb
 
-[all.rst]:https://github.com/scottsievert/rst-to-ipynb/blob/master/tests/all.rst
-[all.ipynb]:http://nbviewer.ipython.org/github/scottsievert/rst-to-ipynb/blob/master/tests/all.ipynb
+## Example
+
+- [all.rst](https://github.com/scottsievert/rst-to-ipynb/blob/master/tests/all.rst) and
+- [all.ipynb](http://nbviewer.ipython.org/github/scottsievert/rst-to-ipynb/blob/master/tests/all.ipynb)
 
 ## TODO:
 
@@ -21,9 +28,7 @@ To produce xxx.ipynb from xxx.rst:
 - [ ] Configurability of the default ReST role, in particular to handle maths in Sage's ReST dialect.
       Current status: hardcoded for Sage.
 - [ ] Configurability of custom ReST roles, in particular to handle Sage's custom roles
-
 - [ ] Proper argument parsing; escape characters, spaces, ... are not
       yet supported
-
 - [ ] Handle input/output blocks within itemize and other indented constructions  
       See https://github.com/aaren/notedown/issues/33
