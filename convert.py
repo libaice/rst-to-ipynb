@@ -19,6 +19,7 @@ DEPS:
 import io
 import os
 pjoin = os.path.join
+import re
 import sys
 from subprocess import Popen, PIPE
 import argparse
@@ -27,9 +28,12 @@ import argparse
 parser = argparse.ArgumentParser(add_help=False)
 parser.add_argument("input", nargs='?', help="the input .rst file. Include the .rst")
 parser.add_argument("-o", "--output", help="the .ipynb output file. Include .ipynb")
+parser.add_argument("-v", "--verbose", action="store_true", help="be verbose")
+parser.add_argument("-d", "--debug", action="store_true", help="write debug information and keep temporary .md file")
 args = parser.parse_args()
 
-print (args.input, args.output)
+if args.verbose:
+    print(args.input, args.output)
 
 here = os.path.dirname(__file__)
 
@@ -45,6 +49,8 @@ input_text = '\n'.join([
 input_text = input_text.replace('`:', '` :')
 
 # convert rst->markdown with pandoc
+if args.verbose:
+    sys.stderr.write("Calling pandoc to convert from rst to markdown\n")
 p = Popen([
         'pandoc',
         '--filter', pjoin(here, 'sageblockfilter.py'),
@@ -72,11 +78,15 @@ intermediate_md = '\n'.join([
     intermediate_md])
 
 # write intermediate markdown for debugging:
-# with open('tmp.md', 'wb') as f:
-#     f.write(intermediate_md)
+if args.debug:
+    sys.stderr.write("Writing intermediate markdown in tmp.md\n")
+    with open('tmp.md', 'w') as f:
+        f.write(intermediate_md)
 
 # md->ipynb via notedown
-command = ['notedown']
+if args.verbose:
+    sys.stderr.write("Calling notedown to convert from markdown to ipynb\n")
+command = ['notedown', '--match=fenced']
 if args.output:
     command.extend(['-o', args.output])
 p = Popen(command, stdin=PIPE)
