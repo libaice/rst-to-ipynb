@@ -77,6 +77,14 @@ intermediate_md = '\n'.join([
     '$$',
     intermediate_md])
 
+# Workaround:
+# notedown does not handle nicely indented fenced code blocks
+# This at least deindents the starting and trailing ```.
+
+regexp = re.compile("^\s*```", flags=re.M)
+intermediate_md = regexp.sub("```", intermediate_md)
+intermediate_md = intermediate_md.replace("``` {", "```{") # Temporary workaround for older versions of notedown; see: https://github.com/aaren/notedown/issues/29.
+
 # write intermediate markdown for debugging:
 if args.debug:
     sys.stderr.write("Writing intermediate markdown in tmp.md\n")
