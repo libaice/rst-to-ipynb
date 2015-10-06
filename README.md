@@ -17,8 +17,8 @@ To produce xxx.ipynb from xxx.rst:
 
 ## Example
 
-- [all.rst](https://github.com/scottsievert/rst-to-ipynb/blob/master/tests/all.rst) and
-- [all.ipynb](http://nbviewer.ipython.org/github/scottsievert/rst-to-ipynb/blob/master/tests/all.ipynb)
+- [all.rst]() and
+- [all.ipynb](http://nbviewer.ipython.org/github/nthiery/rst-to-ipynb/blob/master/tests/all.ipynb)
 
 ## TODO:
 
