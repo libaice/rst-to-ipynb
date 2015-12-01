@@ -194,9 +194,35 @@ Table
 +------+------+
 
 Topics
------
+------
 
 .. TOPIC:: Definition
 
-    Hello, this is a block definition.
+    Hello, this is a block definition
+
+    Some more text
+
+    #.  An enumeration
+
+        .. TOPIC:: Note
+
+            A nested topic within the enumeration within a topic
+
+
+        Back to the item
+
+    #.  Next item
+
+.. TOPIC:: Exercice
+
+    Donner des algorithmes et leur complexité au pire et en moyenne
+    pour les problèmes suivants:
+
+    #.  Effectuer un pivot de Gauss sur une matrice
+
+        .. TOPIC:: Note
+
+            Digression: Complexité arithmétique versus complexité binaire
+
+    #.  Calculer le déterminant d'une matrice
 
