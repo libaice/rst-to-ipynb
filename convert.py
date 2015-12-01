@@ -74,6 +74,7 @@ intermediate_md = '\n'.join([
     r'\def\QQ{\bf Q}',
     r'\def\RR{\bf R}',
     r'\def\ZZ{\bf Z}',
+    r'\def\NN{\bf N}',
     '$$',
     intermediate_md])
 
