@@ -56,7 +56,7 @@ p = Popen([
         '--filter', pjoin(here, 'sageblockfilter.py'),
         '--atx-headers',
         '--from', 'rst',
-        '--to', 'markdown',
+        '--to', 'markdown_github+tex_math_dollars',
     ], stdout=PIPE, stdin=PIPE)
 
 intermediate_md, _ = p.communicate(input_text.encode('utf8'))
