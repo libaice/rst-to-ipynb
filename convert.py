@@ -121,5 +121,5 @@ if args.output:
     with open(args.output, 'w') as f:
         f.write(intermediate_ipynb)
 else:
-    print intermediate_ipynb
+    print(intermediate_ipynb)
 
