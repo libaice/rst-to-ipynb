@@ -59,6 +59,11 @@ p = Popen([
         '--to', 'markdown',
     ], stdout=PIPE, stdin=PIPE)
 
+# pipe_tables are supported by the notebook; don't know why pandoc seem to ignore the option ...
+# grid_tables does not seem supported by the notebook
+# markdown_github does not handle math properly, and tables are html
+# +tex_math_dollars does not seem to have an effect
+
 intermediate_md, _ = p.communicate(input_text.encode('utf8'))
 
 if p.returncode:
