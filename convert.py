@@ -58,13 +58,14 @@ p = Popen([
         '--filter', pjoin(here, 'sageblockfilter.py'),
         '--atx-headers',
         '--from', 'rst',
-        '--to', 'markdown_github+tex_math_dollars',
+        '--to', 'markdown_github+tex_math_dollars+fenced_code_attributes',
     ], stdout=PIPE, stdin=PIPE)
 
 # pipe_tables are supported by the notebook; don't know why pandoc seem to ignore the option ...
 # grid_tables does not seem supported by the notebook
-# markdown_github does not handle math properly, and tables are html
-# +tex_math_dollars does not seem to have an effect
+# Using markdown_github requires:
+# +tex_math_dollars to handle maths (see tests/math.rst)
+# +fenced_code_attributes to handle outputs (see tests/sage_code_blocks.rst)
 
 intermediate_md, _ = p.communicate(input_text.encode('utf8'))
 
