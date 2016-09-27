@@ -23,11 +23,13 @@ import re
 import sys
 from subprocess import Popen, PIPE
 import argparse
+import json
 
 
 parser = argparse.ArgumentParser(add_help=False)
 parser.add_argument("input", nargs='?', help="the input .rst file. Include the .rst")
 parser.add_argument("-o", "--output", help="the .ipynb output file. Include .ipynb")
+parser.add_argument("-k", "--kernel", help="specify the IPython kernel to be used")
 parser.add_argument("-v", "--verbose", action="store_true", help="be verbose")
 parser.add_argument("-d", "--debug", action="store_true", help="write debug information and keep temporary .md file")
 args = parser.parse_args()
@@ -56,7 +58,7 @@ p = Popen([
         '--filter', pjoin(here, 'sageblockfilter.py'),
         '--atx-headers',
         '--from', 'rst',
-        '--to', 'markdown',
+        '--to', 'markdown_github+tex_math_dollars',
     ], stdout=PIPE, stdin=PIPE)
 
 # pipe_tables are supported by the notebook; don't know why pandoc seem to ignore the option ...
@@ -97,13 +99,27 @@ if args.debug:
     with open('tmp.md', 'w') as f:
         f.write(intermediate_md)
 
-# md->ipynb via notedown
+# convert md->ipynb via notedown + postprocess custom kernel
 if args.verbose:
     sys.stderr.write("Calling notedown to convert from markdown to ipynb\n")
-command = ['notedown', '--match=fenced']
-if args.output:
-    command.extend(['-o', args.output])
-p = Popen(command, stdin=PIPE)
-p.communicate(intermediate_md.encode('utf8'))
+
+p = Popen(['notedown', '--match=fenced'], stdin=PIPE, stdout=PIPE)
+
+intermediate_ipynb, _ = p.communicate(intermediate_md.encode('utf8'))
+
 if p.returncode:
     sys.exit("notedown failed: %s" % p.returncode)
+
+intermediate_ipynb = intermediate_ipynb.decode('utf8', 'replace')
+
+if args.kernel:
+    worksheet = json.loads(intermediate_ipynb)
+    worksheet['metadata']['kernelspec'] = {"display_name": args.kernel, 'name': args.kernel}
+    intermediate_ipynb = json.dumps(worksheet,indent=1)
+
+if args.output:
+    with open(args.output, 'w') as f:
+        f.write(intermediate_ipynb)
+else:
+    print intermediate_ipynb
+
