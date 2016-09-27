@@ -95,8 +95,9 @@ intermediate_md = intermediate_md.replace("``` {", "```{") # Temporary workaroun
 
 # write intermediate markdown for debugging:
 if args.debug:
-    sys.stderr.write("Writing intermediate markdown in tmp.md\n")
-    with open('tmp.md', 'w') as f:
+    md = args.input.replace(".rst", ".md")
+    sys.stderr.write("Writing intermediate markdown in %s\n"%md)
+    with open(md, 'w') as f:
         f.write(intermediate_md)
 
 # convert md->ipynb via notedown + postprocess custom kernel
