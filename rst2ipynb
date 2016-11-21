@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 WHAT THIS FILE DOES:
     converts an RST file to a .ipynb file
@@ -55,7 +57,7 @@ if args.verbose:
     sys.stderr.write("Calling pandoc to convert from rst to markdown\n")
 p = Popen([
         'pandoc',
-        '--filter', pjoin(here, 'sageblockfilter.py'),
+        '--filter', pjoin(here, 'rst2ipynb-sageblock-filter'),
         '--atx-headers',
         '--from', 'rst',
         '--to', 'markdown_github+tex_math_dollars+fenced_code_attributes',
