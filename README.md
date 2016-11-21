@@ -17,7 +17,7 @@ Python 3 (for proper UTF-8 support in notedown), pandoc, notedown
 
 Install [pandoc](http://pandoc.org) and then this module as usual:
 
-    git clone git@github.com:nthiery/rst-to-ipynb.git
+    git clone https://github.com/nthiery/rst-to-ipynb.git
     cd rst-to-ipynb
     pip3 install .
 
