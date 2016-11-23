@@ -7,10 +7,11 @@ to `Jupyter notebooks <http://jupyter.org/>`_ file.
 
 This is currently achieved by converting to markdown with
 `pandoc <http://pandoc.org>`_ and then to a Jupyter notebook using
-`notedown <https://github.com/aaren/notedown/>_, plus some
+`notedown <https://github.com/aaren/notedown/>`_, plus some
 configuration and tweaks.
 
-## Requirements
+Requirements
+------------
 
 Python 3 (for proper UTF-8 support in notedown), pandoc, notedown
 
@@ -28,18 +29,21 @@ Caveat: the notedown package on pipy (1.5.0, 2015-10-07) is somewhat
 outdated; for better conversion, , it's recommended to install the
 latest version from the github repo.
 
-## Usage
+Usage
+-----
 
 To convert a reST file ``xxx.rst`` to a Jupyter notebook ``xxx.ipynb``, run:
 
     rst2ipynb xxx.rst -o xxx.ipynb
 
-## Example
+Example
+-------
 
-- `reST: all.rst <tests/all.rst>`_
-- `Jupyter notebook all.ipynb: <http://nbviewer.ipython.org/github/nthiery/rst-to-ipynb/blob/master/tests/all.ipynb>`_
+- reST document: `all.rst <tests/all.rst>`_
+- Produced Jupyter notebook: `all.ipynb: <http://nbviewer.ipython.org/github/nthiery/rst-to-ipynb/blob/master/tests/all.ipynb>`_
 
-## TODO:
+TODO
+----
 
 - [X] Handle Sage's doctests
 - [X] Fenced code blocks: fix incompatibility between pandoc output and notedown input.
