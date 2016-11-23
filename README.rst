@@ -40,7 +40,7 @@ Example
 -------
 
 - reST document: `all.rst <tests/all.rst>`_
-- Produced Jupyter notebook: `all.ipynb: <http://nbviewer.ipython.org/github/nthiery/rst-to-ipynb/blob/master/tests/all.ipynb>`_
+- Produced Jupyter notebook: `all.ipynb <http://nbviewer.ipython.org/github/nthiery/rst-to-ipynb/blob/master/tests/all.ipynb>`_
 
 TODO
 ----
