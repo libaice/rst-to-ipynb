@@ -16,7 +16,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='rst-to-ipynb',
+    name='rst2ipynb',
     version='0.2.0',
     description='reST to Jupyter notebook converter',
     long_description=long_description,

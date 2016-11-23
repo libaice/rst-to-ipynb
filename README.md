@@ -1,4 +1,4 @@
-# rst-to-ipynb
+# rst2ipynb
 
 This project converts standalone
 [reStructuredText](http://docutils.sourceforge.net/rst.html) files
@@ -21,7 +21,11 @@ Install [pandoc](http://pandoc.org) and then this module as usual:
     cd rst-to-ipynb
     pip3 install .
 
-pip3 will install the other dependencies if needed.
+pip3 will install the other dependencies as needed.
+
+Caveat: the notedown package on pipy (1.5.0, 2015-10-07) is somewhat
+outdated; for better conversion, , it's recommended to install the
+latest version from the github repo.
 
 ## Usage
 
