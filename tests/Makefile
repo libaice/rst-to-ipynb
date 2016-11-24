@@ -15,7 +15,7 @@ all.rst: $(RST)
 	for file in $^; do cat $$file >> $@; echo >> $@; done
 
 %.md: %.rst
-	pandoc --filter=../sageblockfilter.py $< --atx-headers -o $@
+	pandoc --filter=../rst2ipynb-sageblock-filter $< --atx-headers -o $@
 
 #	sed -i 's/``` {/```{/' $@
 
@@ -26,7 +26,7 @@ all.rst: $(RST)
 	ipython nbconvert $< -o $@
 
 %.json: %.rst
-	pandoc --filter=../sageblockfilter.py $< --atx-headers -o $@
+	pandoc --filter=../rst2ipynb-sageblock-filter $< --atx-headers -o $@
 
 clean:
 	-rm *.md *.ipynb *.html
