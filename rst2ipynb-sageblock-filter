@@ -14,7 +14,7 @@ def python_input_format(text):
     return CodeBlock([u'', [u'python', u'input'],[] ], text)
 def sage_input_format(text):
     return python_input_format(text)
-def sage_output_format(text):
+def output_format(text):
     return CodeBlock([u'', [u'json', u'output'],[] ],
                      json.dumps([{'data':{'text/plain':text}, 'execution_count': 1, 'metadata': {}, 'output_type': 'execute_result'}]))
 
@@ -57,16 +57,27 @@ def reformat_sage_block(key, value, format, meta):
                 push()
                 current.format = sage_input_format
                 current.value = line[6:]
+        elif line[:4] == ">>> ":
+            if current.format == python_input_format:
+                # Concatenate together contiguous sage inputs
+                current.value += "\n"+line[4:]
+            else:
+                push()
+                current.format = python_input_format
+                current.value = line[4:]
         elif line[:6] == "....: ":
-            assert current.format == sage_input_format
+            if current.format != sage_input_format:
+                warnings.warn("continuation prompt not following a sage prompt: %s"%line)
             current.value += "\n"+line[6:]
+        elif line[:4] == "... " and current.format == python_input_format:
+            current.value += "\n"+line[4:]
         else:
             if current.format is None:
                 current.format = python_input_format
-            elif current.format == sage_input_format:
+            elif current.format == sage_input_format or current.format == python_input_format:
                 push()
                 if line:
-                    current.format = sage_output_format
+                    current.format = output_format
                 else:
                     continue
             if current.value:
