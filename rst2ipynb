@@ -31,7 +31,7 @@ import json
 parser = argparse.ArgumentParser(description="Convert a reStructuredText (.rst) file to a Jupyter notebook (.ipynb)")
 parser.add_argument("input", nargs='?', help="input file (default: read from standard input)")
 parser.add_argument("output", nargs='?', help="output file (default: write to standard output)")
-parser.add_argument("-o", "--output", help="output file (deprecated; use output)")
+parser.add_argument("-o", "--output", help="output file")
 parser.add_argument("-k", "--kernel", help="sets the Jupyter kernel in the notebook")
 parser.add_argument("-v", "--verbose", action="store_true", help="be verbose")
 parser.add_argument("-d", "--debug", action="store_true", help="write debug information and keep temporary .md file")

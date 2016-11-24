@@ -17,7 +17,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='rst2ipynb',
-    version='0.2.1',
+    version='0.2.2',
     description='A reST to Jupyter notebook converter',
     long_description=long_description,
     url='https://github.com/nthiery/rst-to-ipynb',

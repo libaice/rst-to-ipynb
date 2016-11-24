@@ -20,7 +20,7 @@ all.rst: $(RST)
 #	sed -i 's/``` {/```{/' $@
 
 %.ipynb: %.rst
-	python3 ../convert.py -d $< -o $@
+	python3 ../rst2ipynb -d $< -o $@
 
 %.html: %.ipynb
 	ipython nbconvert $< -o $@
