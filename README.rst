@@ -1,11 +1,11 @@
 rst2ipynb
 =========
 
-This project converts standalone
+This project provides a way to convert standalone
 `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ files
-to `Jupyter notebooks <http://jupyter.org/>`_ file.
+to `Jupyter notebook <http://jupyter.org/>`_ files.
 
-This is currently achieved by converting to markdown with
+This is currently achieved by converting to markdown using
 `pandoc <http://pandoc.org>`_ and then to a Jupyter notebook using
 `notedown <https://github.com/aaren/notedown/>`_, plus some
 configuration and tweaks.
@@ -15,9 +15,10 @@ Requirements
 
 Python 3 (for proper UTF-8 support in notedown), pandoc, notedown
 
-## Installation
+Installation
+------------
 
-Install `pandoc <http://pandoc.org>`_ and then this module as usual:
+Install `pandoc <http://pandoc.org>`_ and then this module as usual::
 
     git clone https://github.com/nthiery/rst-to-ipynb.git
     cd rst-to-ipynb
@@ -26,13 +27,13 @@ Install `pandoc <http://pandoc.org>`_ and then this module as usual:
 pip3 will install the other dependencies as needed.
 
 Caveat: the notedown package on pipy (1.5.0, 2015-10-07) is somewhat
-outdated; for better conversion, , it's recommended to install the
+outdated; for better conversion, it is recommended to install the
 latest version from the github repo.
 
 Usage
 -----
 
-To convert a reST file ``xxx.rst`` to a Jupyter notebook ``xxx.ipynb``, run:
+To convert a reST file ``xxx.rst`` to a Jupyter notebook ``xxx.ipynb``, run::
 
     rst2ipynb xxx.rst -o xxx.ipynb
 
