@@ -25,6 +25,18 @@ Code blocks
     plot(x, y)
     show()
 
+Support for Python doctest code blocks::
+
+    >>> 1+1
+    2
+    >>> for x in range(3):
+    ...      print x
+    0
+    1
+    2
+    >>> x = 1
+    >>> x = 2
+
 Sage code blocks
 ----------------
 
@@ -184,6 +196,18 @@ Quote
 
 Table
 -----
+
+A simple table:
+
++------+------+
+| C1   | C2   |
++------+------+
+| a    | b    |
++------+------+
+| c    | d    |
++------+------+
+
+A table with more formatting:
 
 +------+------+
 | C1   | C2   |
