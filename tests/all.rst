@@ -237,16 +237,16 @@ Topics
 
     #.  Next item
 
-.. TOPIC:: Exercice
+Links
+-----
 
-    Donner des algorithmes et leur complexité au pire et en moyenne
-    pour les problèmes suivants:
+A link: `images <images.ipynb>`_
 
-    #.  Effectuer un pivot de Gauss sur une matrice
+rst2ipynb implements some very crude support for ref links; the links
+below will point to `images.ipynb`, allowing at least to refer to
+other documents in the same directory without hardcoding the .ipynb
+extension in the source file.
 
-        .. TOPIC:: Note
-
-            Digression: Complexité arithmétique versus complexité binaire
-
-    #.  Calculer le déterminant d'une matrice
+- :ref:`images`
+- :ref:`Les Images <images>`
 

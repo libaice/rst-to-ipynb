@@ -1,4 +1,4 @@
-RST=code_blocks.rst sage_code_blocks.rst images.rst lists.rst math.rst quote.rst tables.rst topics.rst
+RST=code_blocks.rst sage_code_blocks.rst images.rst lists.rst math.rst quote.rst tables.rst topics.rst links.rst
 MD=$(RST:%.rst=%.md) all.md
 IPYNB=$(MD:%.md=%.ipynb)
 HTML=$(MD:%.md=%.html)

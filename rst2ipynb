@@ -53,6 +53,10 @@ input_text = '\n'.join([
 # pandoc doesn't properly handle : immediately-following close-`
 input_text = input_text.replace('`:', '` :')
 
+# Interpret simple :ref:'s as crosslinks to notebooks in the same directory with the same name
+input_text = re.sub(r":ref:`([\w-]*)`",r"`\1 <\1.ipynb>`_", input_text)
+input_text = re.sub(r":ref:`([\w -]*) *<([\w-]*)>`",r"`\1 <\2.ipynb>`_", input_text)
+
 # convert rst->markdown with pandoc
 if args.verbose:
     sys.stderr.write("Calling pandoc to convert from rst to markdown\n")
