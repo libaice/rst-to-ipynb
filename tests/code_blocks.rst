@@ -29,8 +29,25 @@ Support for Python doctest code blocks::
     2
     >>> for x in range(3):
     ...      print x
+    ...
     0
     1
     2
     >>> x = 1
     >>> x = 2
+
+Function with pycon code block style:
+
+.. code-block:: pycon
+
+   >>> def f(a, b, c):
+   ...     """Multiline
+   ...     docstring
+   ...
+   ...     """
+   ...     # a comment
+   ...
+   ...     return a + b + c
+   ...
+   >>> f(1, 2, 3)
+   6
