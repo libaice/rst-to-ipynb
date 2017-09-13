@@ -16,7 +16,7 @@ def python_input_format(text):
 
 
 def python_doctest_input_format(text):
-    return CodeBlock([u'', [u'python', u'input'], []], text)
+    return python_input_format(text)
 
 
 def sage_input_format(text):
@@ -88,11 +88,11 @@ def reformat_sage_block(key, value, format, meta):
                 warnings.warn(msg % line)
             current.value += "\n" + line[6:]
         # the final "..." may not have a trailing whitespace
-        elif line.startswith("... ") or line == "...":
+        elif ((line.startswith("... ") or line == "...") and
+              current.format != output_format):
             if current.format != python_doctest_input_format:
                 msg = "continuation prompt not following a python prompt: %s"
                 warnings.warn(msg % line)
-                warnings.warn("Format: {}".format(current.format))
             else:
                 current.value += "\n" + line[4:]
         else:  # doesn't have leading prompts
