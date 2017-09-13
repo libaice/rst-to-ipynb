@@ -38,7 +38,7 @@ Support for Python doctest code blocks::
 
 Function with pycon code block style:
 
-.. code-block:: pycon
+.. code:: pycon
 
    >>> def f(a, b, c):
    ...     """Multiline
