@@ -4,16 +4,34 @@ reST to Jupyter notebook converter
 """
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+from setuptools import setup
+from setuptools.command.install import install
+from distutils.errors import DistutilsExecError
 # To use a consistent encoding
 from codecs import open
-from os import path
+import os
 
-here = path.abspath(path.dirname(__file__))
+
+here = os.path.dirname(__file__)
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
+
+
+class check_install(install):
+    "Check that pandoc is installed on the system"
+    def run(self):
+        import subprocess
+        try:
+            # Hide stdout but allow stderr
+            subprocess.check_call(["pandoc", "-v"], stdout=open(os.devnull))
+        except subprocess.CalledProcessError:
+            raise DistutilsExecError("rst2ipynb requires the Haskell program 'pandoc'. It seems to be installed, but it did not work properly.")
+        except OSError:
+            raise DistutilsExecError("rst2ipynb requires the Haskell program 'pandoc'. You need to install it on your system.")
+        install.run(self)
+
 
 setup(
     name='rst2ipynb',
@@ -35,4 +53,5 @@ setup(
     install_requires=['notedown', 'pandocfilters'],
     #setup_requires=['pytest-runner'],
     #tests_require=['pytest'],
+    cmdclass=dict(install=check_install)
 )
