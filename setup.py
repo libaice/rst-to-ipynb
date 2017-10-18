@@ -35,7 +35,7 @@ class check_install(install):
 
 setup(
     name='rst2ipynb',
-    version='0.2.2',
+    version='0.2.3',
     description='A reST to Jupyter notebook converter',
     long_description=long_description,
     url='https://github.com/nthiery/rst-to-ipynb',
