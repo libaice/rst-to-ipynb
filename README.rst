@@ -9,7 +9,7 @@ This is currently achieved by converting to markdown using
 `pandoc <http://pandoc.org>`_ and then to a Jupyter notebook using
 `notedown <https://github.com/aaren/notedown/>`_, plus some
 configuration and tweaks. A better approach would be to implement
-an Jupyter-export extension for Sphinx.
+a proper Jupyter-export extension for Sphinx.
 
 NEWS (2017-10): you may want to explore the recent https://github.com/QuantEcon/sphinxcontrib-jupyter/ that does just this.
 
