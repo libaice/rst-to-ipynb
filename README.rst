@@ -8,7 +8,10 @@ to `Jupyter notebook <http://jupyter.org/>`_ files.
 This is currently achieved by converting to markdown using
 `pandoc <http://pandoc.org>`_ and then to a Jupyter notebook using
 `notedown <https://github.com/aaren/notedown/>`_, plus some
-configuration and tweaks.
+configuration and tweaks. A better approach would be to implement
+an Jupyter-export extension for Sphinx.
+
+NEWS (2017-10): you may want to explore the recent https://github.com/QuantEcon/sphinxcontrib-jupyter/ that does just this.
 
 Requirements
 ------------
@@ -26,9 +29,15 @@ Install `pandoc <http://pandoc.org>`_ and then this module as usual::
 
 pip3 will install the other dependencies as needed.
 
-Caveat: the notedown package on pipy (1.5.0, 2015-10-07) is somewhat
-outdated; for better conversion, it is recommended to install the
-latest version from the github repo.
+For [SageMath](http://sagemath.org) users: `rst2ipynb` is an optional package that you may install with:
+
+    sage -i rst2ipynb
+    
+then you can run it with:
+
+    sage -rst2ipynb ... 
+
+For [Cocalc](http://cocalc.org) users: `rst2ipynb` is already installed.
 
 Usage
 -----
@@ -56,3 +65,8 @@ TODO
       yet supported
 - [ ] Handle input/output blocks within itemize and other indented constructions
       See https://github.com/aaren/notedown/issues/33
+
+Acknowledgements
+----------------
+
+rst2ipynb was partially funded by [OpenDreamKit](http://opendreamkit.org)
