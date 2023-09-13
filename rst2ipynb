@@ -61,7 +61,7 @@ if args.verbose:
 p = Popen([
         'pandoc',
         '--filter', 'rst2ipynb-sageblock-filter',
-        '--atx-headers',
+        '--markdown-headings=atx',
         '--from', 'rst',
         '--to', 'markdown_github+tex_math_dollars+fenced_code_attributes',
     ], stdout=PIPE, stdin=PIPE)
